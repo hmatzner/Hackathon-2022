@@ -45,7 +45,7 @@ def predict_bankrupt():
 
     result = score.append(df_imp, ignore_index = True)
     server_answer = result.to_dict()
-    server_answer = result.to_json()
+    # server_answer = result.to_json()
 
     return jsonify(server_answer)
 
