@@ -48,7 +48,7 @@ def predict_churn():
     # server_answer = result.to_dict()
     # server_answer = result.to_json()
     # return jsonify(server_answer)
-    return jsonify(score)
+    return jsonify({ "score": score })
 
 
 if __name__ == '__main__':
