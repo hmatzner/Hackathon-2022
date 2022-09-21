@@ -23,17 +23,21 @@ model = get_model(filename)
 
 
 @app.route('/predict_bankrupt', methods=['GET', 'POST'])
-def predict_churn():
-    print(request.is_json)
-    model = get_model(filename)
+def predict_bankrupt():
     data = request.get_json(force=True)
+    value = int(data['value'])
+
+    return jsonify({ "value": value + 1 })
+    # print(request.is_json)
+    # model = get_model(filename)
+    # data = request.get_json(force=True)
 
     # df = pd.read_json(data)
     # explainer = shap.TreeExplainer(model)
     # shap_values = explainer.shap_values(df)
-
-    SAMPLE_NUMBER = 0
-    score = model.predict_proba(data)[:, 1][SAMPLE_NUMBER]
+    #
+    # SAMPLE_NUMBER = 0
+    # score = model.predict_proba(data)[:, 1][SAMPLE_NUMBER]
     # score = pd.DataFrame({'feature': 'score', 'importance': [score]})
 
     # ROUNDER = 5
@@ -48,7 +52,6 @@ def predict_churn():
     # server_answer = result.to_dict()
     # server_answer = result.to_json()
     # return jsonify(server_answer)
-    return jsonify({ "score": score })
 
 
 if __name__ == '__main__':
