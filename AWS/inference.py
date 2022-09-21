@@ -5,7 +5,7 @@ from flask import Flask, request
 import shap
 
 app = Flask(__name__)
-AWS_PORT = 8080
+AWS_PORT = 2500
 
 def get_model(filename):
     """Download model from pickle file"""
