@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import pickle
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import shap
 
 app = Flask(__name__)
@@ -44,9 +44,9 @@ def predict_churn():
     df_imp.sort_values(by='importance', inplace=True, ascending=False)
 
     result = score.append(df_imp, ignore_index = True)
-
-    server_answer = result.to_json()
-    return server_answer
+    server_answer = result.to_dict()
+    # server_answer = result.to_json()
+    return jsonify(server_answer)
 
 
 if __name__ == '__main__':
