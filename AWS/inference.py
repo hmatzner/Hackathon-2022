@@ -33,18 +33,18 @@ def predict_bankrupt():
 
     SAMPLE_NUMBER = 0
     score = model.predict_proba(df)[:, 1][SAMPLE_NUMBER]
-    score_df = pd.DataFrame({'feature': 'score', 'importance': [score]})
+    # score_df = pd.DataFrame({'feature': 'score', 'importance': [score]})
 
-    ROUNDER = 5
-    POSITIVE_CLASS = 1
-    feat_name = pd.DataFrame(df.columns)
-    feat_values = pd.DataFrame(np.around(shap_values[0], ROUNDER))
-    df_imp = pd.concat((feat_name, feat_values), axis=1)
-    df_imp.columns = ['feature', 'importance']
-    df_imp.sort_values(by='importance', inplace=True, ascending=False)
-
-    result = score_df.append(df_imp, ignore_index = True)
-    server_answer = result.to_dict()
+    # ROUNDER = 5
+    # POSITIVE_CLASS = 1
+    # feat_name = pd.DataFrame(df.columns)
+    # feat_values = pd.DataFrame(np.around(shap_values[0], ROUNDER))
+    # df_imp = pd.concat((feat_name, feat_values), axis=1)
+    # df_imp.columns = ['feature', 'importance']
+    # df_imp.sort_values(by='importance', inplace=True, ascending=False)
+    #
+    # result = score_df.append(df_imp, ignore_index = True)
+    # server_answer = result.to_dict()
     # server_answer = result.to_json()
 
     return jsonify({'score': score})
