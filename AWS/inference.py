@@ -43,10 +43,11 @@ def predict_churn():
     df_imp.columns = ['feature', 'importance']
     df_imp.sort_values(by='importance', inplace=True, ascending=False)
 
-    result = score.append(df_imp)
+    result = score.append(df_imp, ignore_index = True)
 
     server_answer = result.to_json()
     return server_answer
+
 
 if __name__ == '__main__':
 
