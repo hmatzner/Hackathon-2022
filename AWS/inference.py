@@ -22,7 +22,7 @@ filename = 'churn_model.pkl'
 model = get_model(filename)
 
 
-@app.route('/predict_churn', methods=['POST'])
+@app.route('/predict_bankrupt', methods=['POST'])
 def predict_churn():
     model = get_model(filename)
     data = request.get_json(force=True)
