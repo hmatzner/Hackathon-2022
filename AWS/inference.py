@@ -24,6 +24,7 @@ model = get_model(filename)
 
 @app.route('/predict_bankrupt', methods=['GET', 'POST'])
 def predict_churn():
+    print(request.is_json)
     model = get_model(filename)
     data = request.get_json(force=True)
 
