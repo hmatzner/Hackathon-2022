@@ -5,7 +5,7 @@ from flask import Flask, request
 import shap
 
 app = Flask(__name__)
-
+AWS_PORT = 8080
 
 def get_model(filename):
     """Download model from pickle file"""
@@ -47,3 +47,7 @@ def predict_churn():
 
     server_answer = result.to_json()
     return server_answer
+
+if __name__ == '__main__':
+
+    app.run(host='0.0.0.0', port=AWS_PORT)
