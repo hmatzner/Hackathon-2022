@@ -37,29 +37,9 @@ def predict_bankrupt():
     x = [data[key] for key in feats]
     dict_ = dict(zip(feats, x))
 
+    df = pd.DataFrame([dict_])
 
-    # df = pd.read_json(data).T
-    # df = pd.DataFrame([dict_])
-    # explainer = shap.TreeExplainer(model)
-    # shap_values = explainer.shap_values(df)
-
-    # SAMPLE_NUMBER = 0
-    # score = CLF.predict([x])[0]
-    # score_df = pd.DataFrame({'feature': 'score', 'importance': [score]})
-
-    # ROUNDER = 5
-    # POSITIVE_CLASS = 1
-    # feat_name = pd.DataFrame(df.columns)
-    # feat_values = pd.DataFrame(np.around(shap_values[0], ROUNDER))
-    # df_imp = pd.concat((feat_name, feat_values), axis=1)
-    # df_imp.columns = ['feature', 'importance']
-    # df_imp.sort_values(by='importance', inplace=True, ascending=False)
-    #
-    # result = score_df.append(df_imp, ignore_index = True)
-    # server_answer = result.to_dict()
-    # server_answer = result.to_json()
-
-    return jsonify({'model': str(type(CLF))})
+    return jsonify({'df': str(type(df))})
 
 
 if __name__ == '__main__':
