@@ -44,7 +44,7 @@ def predict_bankrupt():
     # shap_values = explainer.shap_values(df)
 
     # SAMPLE_NUMBER = 0
-    score = CLF.predict([x])[0]
+    # score = CLF.predict([x])[0]
     # score_df = pd.DataFrame({'feature': 'score', 'importance': [score]})
 
     # ROUNDER = 5
@@ -59,7 +59,7 @@ def predict_bankrupt():
     # server_answer = result.to_dict()
     # server_answer = result.to_json()
 
-    return jsonify({'score': score})
+    return jsonify({'model': str(type(CLF))})
 
 
 if __name__ == '__main__':
