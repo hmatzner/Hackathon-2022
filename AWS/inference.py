@@ -59,7 +59,7 @@ def predict_bankrupt():
     # server_answer = result.to_dict()
     # server_answer = result.to_json()
 
-    return jsonify(dict_)
+    return jsonify({'score': score})
 
 
 if __name__ == '__main__':
