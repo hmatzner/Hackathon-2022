@@ -26,14 +26,23 @@ model = get_model(filename)
 def predict_bankrupt():
     model = get_model(filename)
     data = request.get_json(force=True)
+    feats = [' Operating Gross Margin', ' Realized Sales Gross Profit Growth Rate',
+       ' Regular Net Profit Growth Rate', ' Gross Profit to Sales',
+       ' Cash Reinvestment %', ' Research and development expense rate',
+       ' Interest Coverage Ratio (Interest expense to EBIT)',
+       ' Equity to Liability', ' Retained Earnings to Total Assets',
+       ' Current Ratio', ' Average Collection Days', ' Quick Ratio',
+       ' Cash Flow to Sales']
+
+    x = [data[key] for key in feats]
 
     # df = pd.read_json(data).T
-    df = pd.DataFrame([data])
+    # df = pd.DataFrame([data])
     # explainer = shap.TreeExplainer(model)
     # shap_values = explainer.shap_values(df)
 
-    SAMPLE_NUMBER = 0
-    score = model.predict_proba(df)[:, 1][SAMPLE_NUMBER]
+    # SAMPLE_NUMBER = 0
+    score = model.predict_proba([x])[0]
     # score_df = pd.DataFrame({'feature': 'score', 'importance': [score]})
 
     # ROUNDER = 5
