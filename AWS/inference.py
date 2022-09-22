@@ -25,7 +25,7 @@ model = get_model(filename)
 @app.route('/predict_bankrupt', methods=['GET', 'POST'])
 def predict_bankrupt():
     model = get_model(filename)
-    data = request.get_json(force=True)
+    data = request.get_json()
     feats = [' Operating Gross Margin', ' Realized Sales Gross Profit Growth Rate',
        ' Regular Net Profit Growth Rate', ' Gross Profit to Sales',
        ' Cash Reinvestment %', ' Research and development expense rate',
