@@ -24,7 +24,7 @@ model = get_model(filename)
 
 @app.route('/predict_bankrupt', methods=['GET', 'POST'])
 def predict_bankrupt():
-    model = get_model(filename)
+    # model = get_model(filename)
     data = request.get_json()
     feats = [' Operating Gross Margin', ' Realized Sales Gross Profit Growth Rate',
        ' Regular Net Profit Growth Rate', ' Gross Profit to Sales',
@@ -35,14 +35,14 @@ def predict_bankrupt():
        ' Cash Flow to Sales']
 
     x = [data[key] for key in feats]
-
+    dict_ = dict(zip(feats, x))
     # df = pd.read_json(data).T
     # df = pd.DataFrame([data])
     # explainer = shap.TreeExplainer(model)
     # shap_values = explainer.shap_values(df)
 
     # SAMPLE_NUMBER = 0
-    score = model.predict_proba([x])[0]
+    # score = model.predict_proba([x])[0]
     # score_df = pd.DataFrame({'feature': 'score', 'importance': [score]})
 
     # ROUNDER = 5
@@ -57,7 +57,7 @@ def predict_bankrupt():
     # server_answer = result.to_dict()
     # server_answer = result.to_json()
 
-    return jsonify({'score': score})
+    return jsonify(dict_)
 
 
 if __name__ == '__main__':
