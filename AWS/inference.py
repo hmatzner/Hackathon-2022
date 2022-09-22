@@ -7,24 +7,26 @@ import shap
 app = Flask(__name__)
 AWS_PORT = 8080
 
-def get_model(filename):
-    """Download model from pickle file"""
-    return pickle.load(open(filename, 'rb'))
-
-
-def get_prediction(model, X):
-    """Make prediction with the model"""
-    return model.predict(X)
+# def get_model(filename):
+#     """Download model from pickle file"""
+#     return pickle.load(open(filename, 'rb'))
+#
+#
+# def get_prediction(model, X):
+#     """Make prediction with the model"""
+#     return model.predict(X)
 
 
 # download model
-filename = 'churn_model.pkl'
-model = get_model(filename)
+# filename = 'model.pkl'
+# model = get_model(filename)
 
+with open('model.pkl', 'rb') as f:
+    # global model var
+    CLF = pickle.loads(f.read())
 
 @app.route('/predict_bankrupt', methods=['GET', 'POST'])
 def predict_bankrupt():
-    model = get_model(filename)
     data = request.get_json()
     feats = [' Operating Gross Margin', ' Realized Sales Gross Profit Growth Rate',
        ' Regular Net Profit Growth Rate', ' Gross Profit to Sales',
@@ -44,7 +46,7 @@ def predict_bankrupt():
     # shap_values = explainer.shap_values(df)
 
     # SAMPLE_NUMBER = 0
-    score = model.predict_proba([x])[0][1]
+    score = CLF.predict_proba([x])[0][1]
     # score_df = pd.DataFrame({'feature': 'score', 'importance': [score]})
 
     # ROUNDER = 5
