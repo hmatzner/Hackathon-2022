@@ -21,10 +21,11 @@ AWS_PORT = 8080
 # filename = 'model.pkl'
 # model = get_model(filename)
 
-CLF = pickle.load(open('model.pkl', 'rb'))
+
 
 @app.route('/predict_bankrupt', methods=['GET', 'POST'])
 def predict_bankrupt():
+    model = pickle.load(open('model.pkl', 'rb'))
     data = request.get_json()
     feats = [' Operating Gross Margin', ' Realized Sales Gross Profit Growth Rate',
        ' Regular Net Profit Growth Rate', ' Gross Profit to Sales',
@@ -38,7 +39,7 @@ def predict_bankrupt():
     dict_ = dict(zip(feats, x))
 
     df = pd.DataFrame([dict_])
-    pred = CLF.predict(df)
+    pred = model.predict(df)
 
     return jsonify({'df': str(type(pred))})
 
