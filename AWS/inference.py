@@ -51,10 +51,8 @@ def predict_bankrupt():
     df_imp.columns = ['feature', 'importance']
     df_imp.sort_values(by='importance', inplace=True, ascending=False)
 
-    # result = score_df.append(df_imp, ignore_index = True)
-    # server_answer = result.to_dict()
     feat_import = df_imp.set_index('feature')['importance'].to_dict()
-    score = {'score': score}
+    score = {'score': 1 - score}
 
     return jsonify(feat_import, score)
 
