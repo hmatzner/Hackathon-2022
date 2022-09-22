@@ -24,14 +24,13 @@ model = get_model(filename)
 
 @app.route('/predict_bankrupt', methods=['GET', 'POST'])
 def predict_bankrupt():
-    print('good')
     model = get_model(filename)
-    print('good')
     data = request.get_json(force=True)
 
-    df = pd.read_json(data).T
-    explainer = shap.TreeExplainer(model)
-    shap_values = explainer.shap_values(df)
+    # df = pd.read_json(data).T
+    df = pd.DataFrame([data])
+    # explainer = shap.TreeExplainer(model)
+    # shap_values = explainer.shap_values(df)
 
     SAMPLE_NUMBER = 0
     score = model.predict_proba(df)[:, 1][SAMPLE_NUMBER]
