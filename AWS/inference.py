@@ -46,7 +46,7 @@ def predict_bankrupt():
 
     ROUNDER = 5
     feat_name = pd.DataFrame(df.columns)
-    feat_values = pd.DataFrame(np.around(shap_values[0], ROUNDER))
+    feat_values = pd.DataFrame(np.around(shap_values[0], ROUNDER)).T
     df_imp = pd.concat((feat_name, feat_values), axis=1)
     df_imp.columns = ['feature', 'importance']
     df_imp.sort_values(by='importance', inplace=True, ascending=False)
