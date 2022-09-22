@@ -38,8 +38,9 @@ def predict_bankrupt():
     dict_ = dict(zip(feats, x))
 
     df = pd.DataFrame([dict_])
+    pred = CLF.predict(df)
 
-    return jsonify({'df': str(type(df))})
+    return jsonify({'df': str(type(pred))})
 
 
 if __name__ == '__main__':
