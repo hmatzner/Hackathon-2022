@@ -39,9 +39,22 @@ def predict_bankrupt():
     dict_ = dict(zip(feats, x))
 
     df = pd.DataFrame([dict_])
-    pred = model.predict(df)
+    score = model.predict_proba([x])[0][1]
+    score_df = pd.DataFrame({'feature': 'score', 'importance': [score]})
+    explainer = shap.TreeExplainer(model)
+    shap_values = explainer.shap_values(df)
 
-    return jsonify({'df': str(type(pred))})
+    ROUNDER = 5
+    feat_name = pd.DataFrame(df.columns)
+    feat_values = pd.DataFrame(np.around(shap_values[0], ROUNDER))
+    df_imp = pd.concat((feat_name, feat_values), axis=1)
+    df_imp.columns = ['feature', 'importance']
+    df_imp.sort_values(by='importance', inplace=True, ascending=False)
+
+    result = score_df.append(df_imp, ignore_index = True)
+    server_answer = result.to_dict()
+
+    return jsonify(server_answer)
 
 
 if __name__ == '__main__':
