@@ -46,7 +46,7 @@ def predict_bankrupt():
     # shap_values = explainer.shap_values(df)
 
     # SAMPLE_NUMBER = 0
-    score = CLF.predict_proba([x])[0][1]
+    score = CLF.predict([x])[0]
     # score_df = pd.DataFrame({'feature': 'score', 'importance': [score]})
 
     # ROUNDER = 5
