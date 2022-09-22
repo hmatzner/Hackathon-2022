@@ -36,13 +36,15 @@ def predict_bankrupt():
 
     x = [data[key] for key in feats]
     dict_ = dict(zip(feats, x))
+
+
     # df = pd.read_json(data).T
-    # df = pd.DataFrame([data])
+    df = pd.DataFrame([dict_])
     # explainer = shap.TreeExplainer(model)
     # shap_values = explainer.shap_values(df)
 
     # SAMPLE_NUMBER = 0
-    # score = model.predict_proba([x])[0]
+    score = model.predict_proba([x])[0][1]
     # score_df = pd.DataFrame({'feature': 'score', 'importance': [score]})
 
     # ROUNDER = 5
