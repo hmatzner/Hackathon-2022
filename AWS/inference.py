@@ -21,9 +21,7 @@ AWS_PORT = 8080
 # filename = 'model.pkl'
 # model = get_model(filename)
 
-with open('model.pkl', 'rb') as f:
-    # global model var
-    CLF = pickle.loads(f.read())
+CLF = pickle.load(open('model.pkl', 'rb'))
 
 @app.route('/predict_bankrupt', methods=['GET', 'POST'])
 def predict_bankrupt():
